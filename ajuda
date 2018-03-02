@@ -1,0 +1,40 @@
+Como adicionar novas colunas
+1) Criar arquivo de migração
+                # sequelize migration:generate --name GrupoFasesPadroes
+2) Aditar a migration criada
+                'use strict';
+
+                module.exports = {
+                up: (queryInterface, Sequelize) => {
+                    /*
+                    Add altering commands here.
+                    Return a promise to correctly handle asynchronicity.
+
+                    Example:
+                    return queryInterface.createTable('users', { id: Sequelize.INTEGER });
+                    */
+                queryInterface.addColumn(
+                    'GrupoFasesPadroes',
+                    'sequencia', Sequelize.INTEGER
+                    );   
+                },
+
+                down: (queryInterface, Sequelize) => {
+                    /*
+                    Add reverting commands here.
+                    Return a promise to correctly handle asynchronicity.
+
+                    Example:
+                    return queryInterface.dropTable('users');
+                    */
+                queryInterface.removeColumn(
+                    'GrupoFasesPadroes',
+                    'sequencia', Sequelize.INTEGER
+                    );  
+                }
+                };
+3) Executar a migrate
+                # sequelize db:migrate
+
+Migração original do Fases                
+sequelize model:create --name Fases --attributes nome:string,prioridade:integer
