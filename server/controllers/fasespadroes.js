@@ -36,26 +36,22 @@ module.exports = {
   },
   excluir(req, res) {
     return FasesPadroes
-      .find({
-          where: {
-            id: req.params.fasespadroesId,
-            grupofasespadroesId: req.params.grupofasespadroesId,
-          },
-        })
-      .then(fasespadroes => {
-        if (!fasespadroes) {
-          return res.status(404).send({
-            message: 'Fase Padrão não encontrada',
+      .findById(req.params.fasespadroesId)
+      .then(FasesPadroes => {
+        if (!FasesPadroes) {
+          return res.status(400).send({
+            message: 'Fases Padrão não foi encontrado para exclusão',
           });
         }
-  
-        return fasespadroes
+        return FasesPadroes
           .destroy()
-          .then(() => res.status(200).send({message: 'Fase Padrão excluída com sucesso'}))
+          .then(() => res.status(200).send({
+            message: 'Fases Padrão excluído com sucesso',
+          }))
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
-  },  
+  },   
   listar(req, res) {
     return FasesPadroes
       .findAll({

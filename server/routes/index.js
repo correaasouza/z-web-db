@@ -30,4 +30,6 @@ module.exports = (app) => {
   app.put('/api/fases/:faseId', fasesController.atualizar);
   app.delete('/api/fases/:faseId', fasesController.excluir);
 
+  app.delete('/api/fasespadroes/:fasespadroesId', fasespadroesController.excluir);
+
 };
