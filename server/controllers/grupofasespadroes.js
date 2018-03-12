@@ -17,12 +17,13 @@ module.exports = {
   },
   listar(req, res) {
     return GrupoFasesPadroes
-      .findAll({
-        include: [{
-          model: FasesPadroes,
-          as: 'fasesPadroes',
-        }],
-      })
+      // .findAll({
+      //   include: [{
+      //     model: FasesPadroes,
+      //     as: 'fasesPadroes',
+      //   }],
+      // })
+      .findAll()
       .then(Grupofasespadroes => res.status(200).send(Grupofasespadroes))
       .catch(error => res.status(400).send(error));
   },  

@@ -5,8 +5,8 @@ module.exports = {
     return FasesPadroes
       .create({
         descricao: req.body.descricao,
-        grupofasespadroesId: req.params.grupofasespadroesId,
-        fasesId: req.params.fasesId,
+        grupofasespadroesId: req.body.grupofasespadroesId,
+        fasesId: req.body.fasesId, 
       })
       .then(fasespadroes => res.status(201).send(fasespadroes))
       .catch(error => res.status(400).send(error));
@@ -15,8 +15,7 @@ module.exports = {
     return FasesPadroes
       .find({
           where: {
-            id: req.params.fasespadroesId,
-            grupofasespadroesId: req.params.grupofasespadroesId,
+            id: req.params.fasepadraoId
           },
         })
       .then(fasespadroes => {
@@ -27,7 +26,9 @@ module.exports = {
         }  
         return fasespadroes
           .update({
-            descricao: req.body.descricao || fasespadroes.descricao
+            descricao: req.body.descricao || fasespadroes.descricao,
+            fasesId: req.body.fasesId || fasespadroes.fasesId,
+            grupofasespadroesId: req.body.grupofasespadroesId || fasespadroes.grupofasespadroesId
           })
           .then(updatedfasespadroes => res.status(200).send(updatedfasespadroes))
           .catch(error => res.status(400).send(error));
@@ -36,7 +37,7 @@ module.exports = {
   },
   excluir(req, res) {
     return FasesPadroes
-      .findById(req.params.fasespadroesId)
+      .findById(req.params.fasepadraoId)
       .then(FasesPadroes => {
         if (!FasesPadroes) {
           return res.status(400).send({
@@ -56,10 +57,23 @@ module.exports = {
     return FasesPadroes
       .findAll({
         where: {
-          grupofasespadroesId: req.params.grupofasespadroesId,
+          grupofasespadroesId: req.params.grupoFasesId,
         },
       })
       .then(FasesPadroes => res.status(200).send(FasesPadroes))
       .catch(error => res.status(400).send(error));
   }, 
+  recuperarPorId(req, res) {
+    return FasesPadroes
+      .findById(req.params.fasepadraoId)
+      .then(FasesPadroes => {
+        if (!FasesPadroes) {
+          return res.status(404).send({
+            message: 'Fases Padrão não encontrado.',
+          });
+        }
+        return res.status(200).send(FasesPadroes);
+      })
+      .catch(error => res.status(400).send(error));
+  },
 };

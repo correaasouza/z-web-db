@@ -15,11 +15,11 @@ module.exports = (app) => {
   app.put('/api/grupofasespadroes/:grupofasespadroesId', grupofasespadroesController.atualizar);
   app.delete('/api/grupofasespadroes/:grupofasespadroesId', grupofasespadroesController.excluir);
 
-  app.post('/api/grupofasespadroes/:grupofasespadroesId/fasespadroes/:fasesId', fasespadroesController.adicionar);
-  app.get('/api/grupofasespadroes/:grupofasespadroesId/fasespadroes', fasespadroesController.listar);
-  app.put('/api/grupofasespadroes/:grupofasespadroesId/fasespadroes/:fasespadroesId', fasespadroesController.atualizar);
-  app.delete(
-    '/api/grupofasespadroes/:grupofasespadroesId/fasespadroes/:fasespadroesId', fasespadroesController.excluir  
+  app.post('/api/fasespadroes', fasespadroesController.adicionar);
+  app.get('/api/fasespadroes/:fasepadraoId', fasespadroesController.recuperarPorId);
+  app.get('/api/fasespadroes/grupofasespadroes/:grupoFasesId', fasespadroesController.listar);
+  app.put('/api/fasespadroes/:fasepadraoId', fasespadroesController.atualizar);
+  app.delete('/api/fasespadroes/:fasepadraoId', fasespadroesController.excluir  
   );
 
 

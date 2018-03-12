@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     descricao: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    fasesId : DataTypes.INTEGER,
+    grupofasespadroesId: DataTypes.INTEGER
   });
 
   FasesPadroes.associate = (models) => {
